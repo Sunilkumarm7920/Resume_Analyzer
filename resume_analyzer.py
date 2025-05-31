@@ -8,7 +8,7 @@ Original file is located at
 """
 
 import streamlit as st
-import fitz  # PyMuPDF for PDF
+import PyMuPDf
 import docx
 from sentence_transformers import SentenceTransformer, util
 
@@ -21,7 +21,7 @@ model = load_model()
 
 # Function to extract text from PDF
 def extract_text_from_pdf(uploaded_file):
-    doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
+    doc = pymupdf.open(stream=uploaded_file.read(), filetype="pdf")
     text = ""
     for page in doc:
         text += page.get_text()
