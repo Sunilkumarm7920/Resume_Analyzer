@@ -1,6 +1,5 @@
-streamlit
-sentence-transformers
-torch
-PyMuPDF
-python-docx
-torch==2.2.2
+streamlit==1.35.0
+sentence-transformers==2.2.2
+torch==1.13.1
+PyMuPDF==1.19.6
+python-docx==0.8.11
