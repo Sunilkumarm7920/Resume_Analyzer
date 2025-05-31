@@ -1,5 +1,0 @@
-pip install --upgrade pymupdf
-streamlit
-sentence-transformers
-python-docx
-
