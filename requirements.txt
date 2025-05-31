@@ -1,4 +1,5 @@
 streamlit
-sentence-transformers
 python-docx
 pymupdf
+torch==2.2.2
+sentence-transformers==2.6.1
