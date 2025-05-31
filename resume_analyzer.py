@@ -8,7 +8,7 @@ Original file is located at
 """
 
 import streamlit as st
-import PyMuPDf
+import pymupdf # imports the pymupdf library
 import docx
 from sentence_transformers import SentenceTransformer, util
 
