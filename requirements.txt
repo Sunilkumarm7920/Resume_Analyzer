@@ -1,7 +1,6 @@
-pip install --upgrade pip
 streamlit
-sentence-transformers==2.2.2
-torch==2.0.1
-PyMuPDF==1.20.2
+sentence-transformers
+torch
+PyMuPDF
 python-docx
 
