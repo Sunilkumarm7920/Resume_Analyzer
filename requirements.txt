@@ -1,7 +1,11 @@
-streamlit
-tensorflow
 tensorflow-hub
 PyMuPDF
 python-docx
+
+streamlit==1.25.0
+tensorflow==2.11.0
+pandas
+numpy
+
 
 
