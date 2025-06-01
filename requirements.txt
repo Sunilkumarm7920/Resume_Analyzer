@@ -1,6 +1,7 @@
-streamlit==1.35.0
-sentence-transformers==2.2.2
-torch==2.5.1
-PyMuPDF==1.19.6
-python-docx==0.8.11
+streamlit
+tensorflow
+tensorflow-hub
+PyMuPDF
+python-docx
+
 
