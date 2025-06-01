@@ -1,19 +1,19 @@
 import streamlit as st
-import pymupdf
+import fitz  # PyMuPDF
 import docx
-import tensorflow_hub as hub
-import tensorflow as tf
+from sentence_transformers import SentenceTransformer
+import numpy as np
 
-# Load model using TensorFlow Hub
+# Load model using sentence-transformers
 @st.cache_resource
 def load_model():
-    return hub.load("https://tfhub.dev/google/universal-sentence-encoder/4")
+    return SentenceTransformer('all-MiniLM-L6-v2')
 
 model = load_model()
 
 # Function to extract text from PDF
 def extract_text_from_pdf(uploaded_file):
-    doc = pymupdf.open(stream=uploaded_file.read(), filetype="pdf")
+    doc = fitz.open(stream=uploaded_file.read(), filetype="pdf")
     text = ""
     for page in doc:
         text += page.get_text()
@@ -21,6 +21,8 @@ def extract_text_from_pdf(uploaded_file):
 
 # Function to extract text from DOCX
 def extract_text_from_docx(uploaded_file):
+    if uploaded_file is None:
+        return ""
     doc = docx.Document(uploaded_file)
     return "\n".join([para.text for para in doc.paragraphs])
 
@@ -51,8 +53,9 @@ if st.button("🔍 Compute Match Score"):
         st.warning("Please upload both a resume and a job description.")
     else:
         with st.spinner("Computing..."):
-            jd_embed = model([job_description])[0]
-            resume_embed = model([resume_text])[0]
-            score = tf.keras.losses.cosine_similarity(jd_embed, resume_embed).numpy()
-            similarity = (1 + score) * 50  # convert from cosine distance to percentage similarity
-            st.metric(label="Match Score", value=f"{similarity:.2f}/100")
+            jd_embed = model.encode([job_description])[0]
+            resume_embed = model.encode([resume_text])[0]
+            # Compute cosine similarity
+            similarity = np.dot(jd_embed, resume_embed) / (np.linalg.norm(jd_embed) * np.linalg.norm(resume_embed))
+            score = similarity * 100
+            st.metric(label="Match Score", value=f"{score:.2f}/100")
