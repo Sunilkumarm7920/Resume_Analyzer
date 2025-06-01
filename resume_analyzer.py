@@ -4,6 +4,8 @@ import docx
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
+# Set page config FIRST before any Streamlit commands
+st.set_page_config(page_title="Resume Score", layout="centered")
 
 # Load model using sentence-transformers
 @st.cache_resource
@@ -28,7 +30,6 @@ def extract_text_from_docx(uploaded_file):
     return "\n".join([para.text for para in doc.paragraphs])
 
 # Streamlit UI
-st.set_page_config(page_title="Resume Score", layout="centered")
 st.title("📊 Resume Match Score")
 
 # Job Description Input
@@ -60,3 +61,4 @@ if st.button("🔍 Compute Match Score"):
             similarity = np.dot(jd_embed, resume_embed) / (np.linalg.norm(jd_embed) * np.linalg.norm(resume_embed))
             score = similarity * 100
             st.metric(label="Match Score", value=f"{score:.2f}/100")
+
