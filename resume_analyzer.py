@@ -30,7 +30,7 @@ def extract_text_from_docx(uploaded_file):
     return "\n".join([para.text for para in doc.paragraphs])
 
 # Streamlit UI
-st.title("📊 Resume Match Score")
+st.title("📊 AI-Powered Resume Analyzer")
 
 # Job Description Input
 jd_input_type = st.radio("Input JD as:", ["Text Input", "Upload Word (.docx)"])
