@@ -4,6 +4,7 @@ import docx
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
+
 # Load model using sentence-transformers
 @st.cache_resource
 def load_model():
