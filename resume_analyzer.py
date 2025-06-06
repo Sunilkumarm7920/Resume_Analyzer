@@ -62,3 +62,4 @@ if st.button("🔍 Compute Match Score"):
             score = similarity * 100
             st.metric(label="Match Score", value=f"{score:.2f}/100")
 
+
